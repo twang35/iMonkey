@@ -2,38 +2,54 @@
 <html>
 
 <head>
-<title>Incremental Monkeys</title>
+<title>iMonkeys</title>
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 </head>
 
 <body>
 <div class="row" align="center">
-    <h1 style="font-family: Arvo, Georgia, serif"><b>Incremental Monkeys</b></h1>
+	<h1 style="font-family: Arvo, Georgia, serif"><b>iMonkeys</b></h1>
+	<p style="padding: 10px">The infinite monkey theorem states that a monkey hitting keys at random on a typewriter keyboard for an infinite amount of time will almost surely type a given text, such as the complete works of William Shakespeare. - Wikipedia</p>
 </div>
 
 <br>
 
 <div class="row" align="center" style="margin: 20px;">
-    <div class="col-md-5">
-        <textarea id="out" rows="1" style="width: 100%; max-width: 100% border-radius: 5px; border-color: #ccc"></textarea>
-    </div>
+	<div class="col-md-5">
+		<div class="row">
+			<textarea id="out" rows="1" style="width: 100%; max-width: 100% border-radius: 5px; border-color: #ccc"></textarea>
+		</div>
+		<div class="row">
+			<p id="typedWords"></p>
+		</div>
+	</div>
 
-    <div class="col-md-2"></div>
+	<div class="col-md-2">
+		<div class="row">
+			<h3>Number of:</h3>
+		</div>
+		<div class="row">
+			<p id="numLetters"><b>Letters:</b> 0</p>
+		</div>
+		<div class="row">
+			<p id="numIMonkeys"><b>iMonkeys:</b> 0</p>
+		</div>
+	</div>
 
-    <div class="col-md-5" align="left">
-        <div class="row">
-            <button type="button" class="btn btn-default" onclick="startText()">Generate Letters!</button>
-        </div>
-        <p></p>
-        <div class="row">
-            <button type="button" class="btn btn-default" onclick="stopText()">Stop!</button>
-        </div>
-        <p></p>
-        <div class="row">
-            <button type="button" class="btn btn-default" onclick="clearText()">Clear</button>
-        </div>
-    </div>
-
+	<div class="col-md-5" align="left">
+		<div class="row">
+			<button type="button" class="btn btn-default" onclick="hireIMonkey()">Hire iMonkey</button>
+		</div>
+		<p></p>
+		<div class="row">
+			<button type="button" class="btn btn-default" onclick="stopText()">Stop!</button>
+		</div>
+		<p></p>
+		<div class="row">
+			<button type="button" class="btn btn-default" onclick="clearText()">Clear</button>
+		</div>
+	</div>
 </div>
 
 <script src="monkeys.js"></script>
