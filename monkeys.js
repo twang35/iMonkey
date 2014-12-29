@@ -13,10 +13,13 @@ var bBillsMult = 1;
 var monkeyCost = 10;
 var numIMonkeys = 0;
 
+var speedMult = 1;
+var letterSpeed = 0;
+
 var pause = 0;
 
 var typed;
-var todo = [].slice.call(document.getElementById("todo").innerHTML.toUpperCase());
+var todo = [];
 
 function driver() {
 	randomText();
@@ -46,8 +49,8 @@ function needMoBills() {
 }
 
 function calcTime() {
-	time = 500/(9+numIMonkeys);
-	document.getElementById("speed").innerHTML = "Letters Per Second: " + Math.floor(700/time + .5);
+	time = (500/(9+numIMonkeys))/speedMult;
+	// document.getElementById("speed").innerHTML = "Letters Per Second: " + Math.floor(700/time + .5);
 }
 
 function changeMonkeyCost(change) {
@@ -62,6 +65,7 @@ function changeBBills(change) {
 
 function randomText() {
 	numLetters += 1;
+	letterSpeed += 1;
 	document.getElementById("numLetters").innerHTML = "<b>Letters:</b> " + numLetters + "</p>";
 
 	if (output.length > 40) {
@@ -80,6 +84,18 @@ function randomText() {
 
 function shakespeare(letter) {
 	// console.log(todo);
+	if (todo[0] == "<") {
+		todo.shift();
+		todo.shift();
+		todo.shift();
+		todo.shift();
+
+		var inner = document.getElementById("todo").innerHTML;
+
+		document.getElementById("typed").innerHTML += "<br>";
+		document.getElementById("todo").innerHTML = inner.substring(4, inner.length);
+		return;
+	}
 	if (letter == todo[0] || /[^a-zA-Z]/.test(todo[0])) {
 		todo.shift();
 
@@ -179,10 +195,6 @@ function inArray(word) {
 	return -1;
 }
 
-function test() {
-	document.getElementById("typedWords").innerHTML = todo;
-}
-
 function foundWord(word) {
 	wordCount += 1;
 	if (wordCount > 20) {
@@ -192,10 +204,6 @@ function foundWord(word) {
 	document.getElementById("typedWords").innerHTML = word + " <br> " + document.getElementById("typedWords").innerHTML
 	changeBBills(word.length);
 }
-
-// function loadRandJ() {
-// 	document.getElementById("todo").innerHTML = romeoAndJuliet;
-// }
  
 // Do a jQuery Ajax request for the text dictionary
 $.get( "ospd.txt", function( txt ) {
@@ -233,4 +241,28 @@ function findWord( letters ) {
 		// Otherwise remove another letter from the end
 		curLetters.pop();
 	}
+}
+
+function speedMultFunct() {
+	if(speedMult == 8) {
+		speedMult = 0.5;
+	}
+	speedMult *= 2;
+
+	document.getElementById("speedMultBTN").innerHTML = "Speed: " + speedMult + "x";
+
+	calcTime();
+}
+
+accurateSpeed();
+function accurateSpeed() {
+	setTimeout("accurateSpeed()", 1000);
+
+	document.getElementById("speed").innerHTML = "Letters Per Second: " + letterSpeed;
+
+	letterSpeed = 0;
+}
+
+function test() {
+	document.getElementById("typed").innerHTML += "<br>";
 }
