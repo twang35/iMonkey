@@ -10,9 +10,16 @@ var numLetters = 0;
 
 var bBills = 10;
 var bBillsMult = 1;
-var monkeyCost = 10;
-var numIMonkeys = 0;
 
+var primateName = ["iMonkey", "iGorilla", "King Kong", "Monkey King"];
+var primateIncr = [10, 100, 200, 1000];
+var primateCost = [10, 100, 200, 1000];
+var primateSpeed = [1, 10, 20, 100];
+var primateNum = [0, 0, 0, 0];
+
+var JGoodallCost = 100;
+
+var baseTime = 500;
 var speedMult = 1;
 var letterSpeed = 0;
 
@@ -26,39 +33,52 @@ function driver() {
 	run = setTimeout("driver()", time);
 }
 
-function hireIMonkey() {
-	if (bBills >= monkeyCost) {
-		numIMonkeys += 1;
-		changeBBills(-monkeyCost);
-		changeMonkeyCost(monkeyCost+10);
-		document.getElementById("numIMonkeys").innerHTML = "<b>iMonkeys:</b> " + numIMonkeys;
+// Buy Things
+
+function hire(type, num) {
+	if (bBills >= primateCost[type]) {
+		primateNum[type] += 1;
+		changeBBills(-primateCost[type]);
+
+		primateCost[type] += primateIncr[type];
+		document.getElementById(primateName[type]+"Cost").innerHTML = "Banana Bills: " + primateCost[type];
+
+		document.getElementById("num"+primateName[type]).innerHTML = "<b>"+primateName[type]+"s:</b> " + primateNum[type];
 
 		clearTimeout(run);
 		calcTime();
 		driver();
 	}
 	else {
-		before = document.getElementById("monkeyCost").innerHTML;
-		setTimeout("needMoBills()", 1000);
-		document.getElementById("monkeyCost").innerHTML = "<h4>" + "Banana Bills: " + monkeyCost + "</h4>";
+		setTimeout('document.getElementById(primateName['+type+']+"Cost").innerHTML = "Banana Bills: " + primateCost['+type+'];', 1000);
+		document.getElementById(primateName[type]+"Cost").innerHTML = "<h4>" + "Banana Bills: " + primateCost[type] + "</h4>";
 	}
 }
 
-function needMoBills() {
-	document.getElementById("monkeyCost").innerHTML = "Banana Bills: " + monkeyCost;
+function buyJaneGoodall() {
+	if (JGoodallCost == 0 || bBills < JGoodallCost) {
+		setTimeout('document.getElementById("buyJGoodallCost").innerHTML = "Banana Bills: " + JGoodallCost;', 1000);
+		document.getElementById("buyJGoodallCost").innerHTML = "<h4>" + "Banana Bills: " + JGoodallCost + "</h4>";
+	}
+	else {
+		bBillsMult *= 2;
+
+		document.getElementById("buyJGoodallCost").innerHTML = "<b>Earned Banana Bills x 2</b>";
+	}
 }
 
 function calcTime() {
-	time = (500/(9+numIMonkeys))/speedMult;
+	var monkeySum = 0;
+	for (var i = 0; i < primateNum.length; i++) {
+		monkeySum += primateNum[i]*primateSpeed[i];
+	}
+	time = baseTime/monkeySum/speedMult;
 	// document.getElementById("speed").innerHTML = "Letters Per Second: " + Math.floor(700/time + .5);
 }
 
-function changeMonkeyCost(change) {
-	monkeyCost = change;
-	document.getElementById("monkeyCost").innerHTML = "Banana Bills: " + monkeyCost;
-}
-
 function changeBBills(change) {
+	if (change>0) 
+		change += change;
 	bBills += change;
 	document.getElementById("bBills").innerHTML = "<b>Banana Bills: </b> " + bBills;
 }
@@ -108,7 +128,7 @@ function shakespeare(letter) {
 			// clearTimeout(run);
 			console.log("You win!");
 			// pauseText();
-			document.getElementById("todo").innerHTML = "<h2>You Won!</h2>";
+			document.getElementById("todo").innerHTML = "<h2>You Win!</h2><br><img src=\"giraffe.jpeg\"><br><h1>DING HO!</h1><br>";
 		}
 	}
 }
@@ -189,9 +209,6 @@ function inArray(word) {
 			index = Math.floor((start + end) / 2);
 		}
 	}
-
-	// not found
-	// alert("Not Found: " + index);
 	return -1;
 }
 
@@ -244,7 +261,7 @@ function findWord( letters ) {
 }
 
 function speedMultFunct() {
-	if(speedMult == 8) {
+	if(speedMult == 32) {
 		speedMult = 0.5;
 	}
 	speedMult *= 2;
@@ -256,11 +273,9 @@ function speedMultFunct() {
 
 accurateSpeed();
 function accurateSpeed() {
-	setTimeout("accurateSpeed()", 1000);
-
 	document.getElementById("speed").innerHTML = "Letters Per Second: " + letterSpeed;
-
 	letterSpeed = 0;
+	setTimeout("accurateSpeed()", 1000);
 }
 
 function test() {

@@ -23,7 +23,15 @@
 			<p id="typed"></p>
 
 			<h4>To Do:</h4>
-			<p id="todo" style="font-family: serif"><button type="button" class="btn btn-default" onclick="loadRandJ()">Load Romeo and Juliet</button></p>
+			<p id="todo" style="font-family: serif">
+				<button type="button" class="btn btn-default" onclick="loadRandJ()">Load Romeo and Juliet</button>
+				<br>
+				<br>
+				<button type="button" class="btn btn-default" onclick="loadSonnet18()">Load Sonnet 18</button>
+				<br>
+				<br>
+				<button type="button" class="btn btn-default" onclick="loadShort()">DING HO!</button>
+			</p>
 		</div>
 	</div>
 
@@ -50,7 +58,16 @@
 			<p id="numLetters"><b>Letters:</b> 0</p>
 		</div>
 		<div class="row">
-			<p id="numIMonkeys"><b>iMonkeys:</b> 0</p>
+			<p id="numiMonkey"><b>iMonkeys:</b> 0</p>
+		</div>
+		<div class="row">
+			<p id="numiGorilla"><b>iGorillas:</b> 0</p>
+		</div>
+		<div class="row">
+			<p id="numKing Kong"><b>King Kong:</b> 0</p>
+		</div>
+		<div class="row">
+			<p id="numMonkey King"><b>Monkey King:</b> 0</p>
 		</div>
 	</div>
 
@@ -62,18 +79,30 @@
 			<div class="col-md-4">
 				<p id="typedWords"></p>
 			</div>
-			<div class="col-md-8" style="padding: 10px;">
+			<div class="col-md-4" style="padding: 10px;">
 				<div class="row">
-					<button type="button" class="btn btn-default" onclick="hireIMonkey()">Hire iMonkey</button><p id="monkeyCost">Banana Bills: 10</p>
+					<button type="button" class="btn btn-default" onclick="hire(0, 1)">Hire iMonkey</button><p id="iMonkeyCost">Banana Bills: 10</p>
+				</div>
+				<p></p>
+				<div class="row">
+					<button type="button" class="btn btn-default" onclick="hire(1, 1)">Hire iGorilla</button><p id="iGorillaCost">Banana Bills: 100</p>
+				</div>
+				<p></p>
+				<div class="row">
+					<button type="button" class="btn btn-default" onclick="hire(2, 1)">Hire King Kong</button><p id="King KongCost">Banana Bills: 200</p>
+				</div>
+				<p></p>
+				<div class="row">
+					<button type="button" class="btn btn-default" onclick="hire(3, 1)">Hire Monkey King</button><p id="Monkey KingCost">Banana Bills: 1000</p>
 				</div>
 				<p></p>
 				<div class="row">
 					<button id="pauseBTN" type="button" class="btn btn-default" onclick="pauseText()">Pause</button>
 				</div>
-				<p></p>
+				<!-- <p></p>
 				<div class="row">
 					<button type="button" class="btn btn-default" onclick="clearText()">Clear</button>
-				</div>
+				</div> -->
 				<p></p>
 				<div class="row">
 					<button type="button" class="btn btn-default" onclick="test()">test</button>
@@ -83,6 +112,12 @@
 					<button id="speedMultBTN" type="button" class="btn btn-default" onclick="speedMultFunct()">Speed: 1x</button>
 				</div>
 			</div>
+			<div class="col-md-4" style="padding: 10px;">
+				<div class="row">
+					<button type="button" class="btn btn-default" onclick="buyJaneGoodall()">Buy Jane Goodall</button><p id="buyJGoodallCost">Banana Bills: 100</p>
+				</div>
+				<p></p>
+			<div>
 		</div>
 	</div>
 </div>
