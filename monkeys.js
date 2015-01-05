@@ -14,7 +14,7 @@ var bBillsMult = 1;
 var primateName = ["iMonkey", "iGorilla", "King Kong", "Monkey King"];
 var primateIncr = [10, 100, 200, 1000];
 var primateCost = [10, 100, 200, 1000];
-var primateSpeed = [1, 10, 20, 100];
+var primateSpeed = [1, 10, 20, 40];
 var primateNum = [0, 0, 0, 0];
 
 var JGoodallCost = 100;
@@ -25,8 +25,9 @@ var letterSpeed = 0;
 
 var pause = 0;
 
-var typed;
 var todo = [];
+
+setTimeout('document.getElementById("firstLoad").innerHTML = \'<h3 style="margin-top: 0px;">Load A Text<h3>\'', 1000);
 
 function driver() {
 	randomText();
@@ -63,7 +64,7 @@ function buyJaneGoodall() {
 	else {
 		bBillsMult *= 2;
 
-		document.getElementById("buyJGoodallCost").innerHTML = "<b>Earned Banana Bills x 2</b>";
+		document.getElementById("buyJGoodallCost").innerHTML = "<b>Earned Banana <br>Bills x2</b>";
 	}
 }
 
@@ -77,10 +78,14 @@ function calcTime() {
 }
 
 function changeBBills(change) {
-	if (change>0) 
+	if (change>0 && bBillsMult == 2) 
 		change += change;
 	bBills += change;
 	document.getElementById("bBills").innerHTML = "<b>Banana Bills: </b> " + bBills;
+}
+
+function manualMoney() {
+	changeBBills(1);
 }
 
 function randomText() {
@@ -97,12 +102,12 @@ function randomText() {
 	output += letter;
 
 	newLetter(letter);
-	shakespeare(letter);
+	checkOriginal(letter);
 
 	document.getElementById("out").innerHTML = output;
 }
 
-function shakespeare(letter) {
+function checkOriginal(letter) {
 	// console.log(todo);
 	if (todo[0] == "<") {
 		todo.shift();
@@ -125,16 +130,25 @@ function shakespeare(letter) {
 		document.getElementById("todo").innerHTML = inner.substring(1, inner.length);
 
 		if (inner.length == 1) {
-			// clearTimeout(run);
 			console.log("You win!");
 			// pauseText();
-			document.getElementById("todo").innerHTML = "<h2>You Win!</h2><br><img src=\"giraffe.jpeg\"><br><h1>DING HO!</h1><br>";
+			var typed = document.getElementById("typed").innerHTML;
+			document.getElementById("typed").innerHTML = '<h2>You Win!</h2><br><img src="giraffe.jpeg"><br><h1>DING HO!</h1><br><button type="button" class="btn btn-default" onclick="loadAgain()">Load Another Text</button><br><br>' + typed;
 		}
 	}
 }
 
+function loadAgain() {
+	document.getElementById("textLoaded").style.display="none";
+	document.getElementById("loadText").style.display="inherit";
+
+	document.getElementById("typed").innerHTML = '';
+}
+
 function pauseText() {
 	if (pause == 0) {
+		if (run == null) 
+			return;
 		clearTimeout(run);
 		pause = 1;
 		document.getElementById("pauseBTN").innerHTML = "Start";
@@ -279,5 +293,5 @@ function accurateSpeed() {
 }
 
 function test() {
-	document.getElementById("typed").innerHTML += "<br>";
+	document.getElementById("speedMultBTN").style.visibility="visible";
 }

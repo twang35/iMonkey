@@ -1,3 +1,11 @@
+.invisible_button {
+  background: transparent;
+  border: none !important;
+  font-size:0;
+  height: 50%;
+  width: 50%;
+}
+
 @import url(http://fonts.googleapis.com/css?family=Arvo:400,700);
 /*!
  * Bootstrap v3.2.0 (http://getbootstrap.com)

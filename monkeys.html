@@ -18,19 +18,23 @@
 
 <div class="row" align="center" style="margin: 20px;">
 	<div class="col-md-5">
-		<div class="row">
+		<div id="loadText" class="row" style="display: inherit;">
+			<div id="firstLoad"><h2 style="margin-top: 0px;"><b>Load a Text<b></h2></div>
+			<h4 style="margin-top: 0px;">Short</h4>
+			<button type="button" class="btn btn-default" onclick="loadShort()">Summers Day</button>
+			<br><br>
+			<button type="button" class="btn btn-default" onclick="loadSonnet18()">Sonnet 18</button>
+			<h4>Medium</h4>
+			<button type="button" class="btn btn-default" onclick="loadGettysburg()">Gettysburg Address</button>
+			<h4>Long</h4>
+			<button type="button" class="btn btn-default" onclick="loadRandJ()">Romeo and Juliet</button>
+		</div>
+		<div id="textLoaded" class="row" style="display: none;">
 			<h4>Typed:</h4>
 			<p id="typed"></p>
 
-			<h4>To Do:</h4>
+			<h4>Original:</h4>
 			<p id="todo" style="font-family: serif">
-				<button type="button" class="btn btn-default" onclick="loadRandJ()">Load Romeo and Juliet</button>
-				<br>
-				<br>
-				<button type="button" class="btn btn-default" onclick="loadSonnet18()">Load Sonnet 18</button>
-				<br>
-				<br>
-				<button type="button" class="btn btn-default" onclick="loadShort()">DING HO!</button>
 			</p>
 		</div>
 	</div>
@@ -47,6 +51,13 @@
 		</div>
 		<div class="row">
 			<p id="bBills"><b>Banana Bills:</b> 10</p>
+		</div>
+		<button type="button" class="btn btn-default" onclick="manualMoney()">Make 1 Banana Bill</button>
+
+		<p></p>
+		
+		<div class="row">
+			<button id="pauseBTN" type="button" class="btn btn-default" onclick="pauseText()">Pause</button>
 		</div>
 
 		<p></p>
@@ -77,6 +88,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-4">
+				<h4>Words Typed:</h4>
 				<p id="typedWords"></p>
 			</div>
 			<div class="col-md-4" style="padding: 10px;">
@@ -95,28 +107,23 @@
 				<div class="row">
 					<button type="button" class="btn btn-default" onclick="hire(3, 1)">Hire Monkey King</button><p id="Monkey KingCost">Banana Bills: 1000</p>
 				</div>
-				<p></p>
-				<div class="row">
-					<button id="pauseBTN" type="button" class="btn btn-default" onclick="pauseText()">Pause</button>
-				</div>
 				<!-- <p></p>
 				<div class="row">
 					<button type="button" class="btn btn-default" onclick="clearText()">Clear</button>
 				</div> -->
-				<p></p>
-				<div class="row">
-					<button type="button" class="btn btn-default" onclick="test()">test</button>
-				</div>
-				<p></p>
-				<div class="row">
-					<button id="speedMultBTN" type="button" class="btn btn-default" onclick="speedMultFunct()">Speed: 1x</button>
-				</div>
 			</div>
 			<div class="col-md-4" style="padding: 10px;">
 				<div class="row">
 					<button type="button" class="btn btn-default" onclick="buyJaneGoodall()">Buy Jane Goodall</button><p id="buyJGoodallCost">Banana Bills: 100</p>
 				</div>
 				<p></p>
+				<div class="row">
+					<button onclick="test()" class="invisible_button">test</button>
+				</div>
+				<p></p>
+				<div class="row">
+					<button id="speedMultBTN" type="button" class="btn btn-default" onclick="speedMultFunct()" style="visibility: hidden;">Speed: 1x</button>
+				</div>
 			<div>
 		</div>
 	</div>
