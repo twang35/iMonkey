@@ -64,6 +64,8 @@ function buyJaneGoodall() {
 	else {
 		bBillsMult *= 2;
 
+		changeBBills(-100);
+
 		document.getElementById("buyJGoodallCost").innerHTML = "<b>Earned Banana <br>Bills x2</b>";
 	}
 }
