@@ -4,6 +4,7 @@ var output = "";
 var dict = {};
 var dictArray = [];
 var checkList = [];
+var alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 
 var wordCount = 0;
 var numLetters = 0;
@@ -22,6 +23,7 @@ var JGoodallCost = 100;
 var baseTime = 500;
 var speedMult = 1;
 var letterSpeed = 0;
+var makeFaster = false;
 
 var pause = 0;
 
@@ -93,20 +95,29 @@ function manualMoney() {
 function randomText() {
 	numLetters += 1;
 	letterSpeed += 1;
-	document.getElementById("numLetters").innerHTML = "<b>Letters:</b> " + numLetters + "</p>";
 
 	if (output.length > 40) {
-		// output = output.substring(1);
+		output = output.substring(1);
 		clearText();
 	}
 
-	var letter = String.fromCharCode(65 + Math.floor(Math.random()*26));
+	var letter = alphabet[Math.floor(Math.random()*26)];
 	output += letter;
 
 	newLetter(letter);
 	checkOriginal(letter);
 
-	document.getElementById("out").innerHTML = output;
+	if (makeFaster) {
+		if (output.length > 39) {
+			document.getElementById("out").innerHTML = output;
+			output = "";
+			document.getElementById("numLetters").innerHTML = "<b>Letters:</b> " + numLetters + "</p>";
+		}
+	}
+	else {
+		document.getElementById("out").innerHTML = output;
+		document.getElementById("numLetters").innerHTML = "<b>Letters:</b> " + numLetters + "</p>";
+	}
 }
 
 function checkOriginal(letter) {
@@ -292,6 +303,10 @@ function accurateSpeed() {
 	document.getElementById("speed").innerHTML = "Letters Per Second: " + letterSpeed;
 	letterSpeed = 0;
 	setTimeout("accurateSpeed()", 1000);
+}
+
+function speedUp() {
+	makeFaster = true;
 }
 
 function test() {

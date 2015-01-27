@@ -1,4 +1,4 @@
-Incremental Monkeys
+Incremental Monkeys 0.11
 =======
 
 The infinite monkey theorem states that a monkey hitting keys at random on a typewriter keyboard for an infinite amount of time will almost surely type a given text, such as the complete works of William Shakespeare.
@@ -14,3 +14,8 @@ To Do
 - Add all of Romeo and Juliet
 - Pixel This (uncover a random book and have the player guess book title)
 - Don't pause when not in focus
+
+
+#### 0.11
+
+- added "Lower Framerate" button that increases speed by 50%
