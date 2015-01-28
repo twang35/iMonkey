@@ -18,7 +18,7 @@ To Do
 #### 0.13
 - Hire Dian Fossey
 - Monkeys type 2 letters at a time
-- Maximum letters per second cap now tripled
+- Maximum letters per second cap now doubled
 
 #### 0.12
 
