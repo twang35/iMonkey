@@ -59,7 +59,7 @@ function hire(type, num) {
 }
 
 function buyJaneGoodall() {
-	if (JGoodallCost == 0 || bBills < JGoodallCost) {
+	if (bBills < JGoodallCost) {
 		setTimeout('document.getElementById("buyJGoodallCost").innerHTML = "Banana Bills: " + JGoodallCost;', 1000);
 		document.getElementById("buyJGoodallCost").innerHTML = "<h4>" + "Banana Bills: " + JGoodallCost + "</h4>";
 	}
@@ -67,6 +67,10 @@ function buyJaneGoodall() {
 		bBillsMult *= 2;
 
 		changeBBills(-100);
+
+		document.getElementById("JGoodallBTN").disabled = true;
+
+		// document.getElementById("buyJGoodallCost").onclick = "blah";
 
 		document.getElementById("buyJGoodallCost").innerHTML = "<b>Earned Banana <br>Bills x2</b>";
 	}
@@ -306,7 +310,11 @@ function accurateSpeed() {
 }
 
 function speedUp() {
-	makeFaster = true;
+	makeFaster = !makeFaster;
+	if (makeFaster)
+		document.getElementById("increaseSpeed").innerHTML = "Frame Rate: Low";
+	else
+		document.getElementById("increaseSpeed").innerHTML = "Frame Rate: High";
 }
 
 function test() {
