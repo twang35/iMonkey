@@ -7,7 +7,10 @@ Play the game at [iMonkey.tony-wang.com](http://iMonkey.tony-wang.com)
 
 To Do
 ------
-- add captions to buttons for clarity
+- Add captions to buttons for clarity
+- Save game
+- Generate random letter lists in background
+- 	Iterate through list skipping an increasing number of letters with each loop
 - Enable player to type with monkeys
 - Add all of Romeo and Juliet
 - Pixel This (uncover a random book and have the player guess book title)
