@@ -12,13 +12,10 @@ var wordCount = 0;
 var numLetters = 0;
 
 var bBills = 10;
-var bBillsMult = 1;
 
 var primateName = ["iMonkey", "iGorilla", "King Kong", "Monkey King"];
 var primateIncr = [10, 100, 200, 1000];
-var primateCost = [10, 100, 200, 1000];
 var primateSpeed = [1, 10, 20, 40];
-var primateNum = [0, 0, 0, 0];
 
 var JGoodallCost = 100;
 var doubleLettersCost = 1000;
@@ -27,12 +24,18 @@ var baseTime = 500;
 var speedMult = 1;
 var letterSpeed = 0;
 var makeFaster = false;
-var letterRate = 1;		// single, double, triple per tick
 
 var pause = 0;
 
 var todo = [];
 
+var Player = {
+      primateNum: [0,0,0,0],
+      primateCost: [10,100,200,1000],
+      letterRate: 1,   // single, double, triple per tick
+      bBillsMult: 1
+    };
+    
 setTimeout('document.getElementById("firstLoad").innerHTML = \'<h3 style="margin-top: 0px;">Load A Text<h3>\'', 1000);
 
 function driver() {
@@ -43,22 +46,22 @@ function driver() {
 // Buy Things
 
 function hire(type, num) {
-	if (bBills >= primateCost[type]) {
-		primateNum[type] += 1;
-		changeBBills(-primateCost[type]);
+	if (bBills >= Player.primateCost[type]) {
+		Player.primateNum[type] += 1;
+		changeBBills(-Player.primateCost[type]);
 
-		primateCost[type] += primateIncr[type];
-		document.getElementById(primateName[type]+"Cost").innerHTML = "Banana Bills: " + primateCost[type];
+		Player.primateCost[type] += primateIncr[type];
+		document.getElementById(primateName[type]+"Cost").innerHTML = "Banana Bills: " + Player.primateCost[type];
 
-		document.getElementById("num"+primateName[type]).innerHTML = "<b>"+primateName[type]+"s:</b> " + primateNum[type];
+		document.getElementById("num"+primateName[type]).innerHTML = "<b>"+primateName[type]+"s:</b> " + Player.primateNum[type];
 
 		// clearTimeout(run);
 		calcTime();
 		driver();
 	}
 	else {
-		setTimeout('document.getElementById(primateName['+type+']+"Cost").innerHTML = "Banana Bills: " + primateCost['+type+'];', 1000);
-		document.getElementById(primateName[type]+"Cost").innerHTML = "<h4>" + "Banana Bills: " + primateCost[type] + "</h4>";
+		setTimeout('document.getElementById(primateName['+type+']+"Cost").innerHTML = "Banana Bills: " + Player.primateCost['+type+'];', 1000);
+		document.getElementById(primateName[type]+"Cost").innerHTML = "<h4>" + "Banana Bills: " + Player.primateCost[type] + "</h4>";
 	}
 }
 
@@ -68,7 +71,7 @@ function buyJaneGoodall() {
 		document.getElementById("buyJGoodallCost").innerHTML = "<h4>" + "Banana Bills: " + JGoodallCost + "</h4>";
 	}
 	else {
-		bBillsMult *= 2;
+		Player.bBillsMult *= 2;
 
 		changeBBills(-100);
 
@@ -84,7 +87,7 @@ function buyDoubleLetters() {
 		document.getElementById("doubleLettersCost").innerHTML = "<h4>" + "Banana Bills: " + doubleLettersCost + "</h4>";
 	}
 	else {
-		letterRate *= 2;
+		Player.letterRate *= 2;
 
 		changeBBills(-1000);
 
@@ -96,15 +99,15 @@ function buyDoubleLetters() {
 
 function calcTime() {
 	var monkeySum = 0;
-	for (var i = 0; i < primateNum.length; i++) {
-		monkeySum += primateNum[i]*primateSpeed[i];
+	for (var i = 0; i < Player.primateNum.length; i++) {
+		monkeySum += Player.primateNum[i]*primateSpeed[i];
 	}
 	time = baseTime/monkeySum/speedMult;
 	// document.getElementById("speed").innerHTML = "Letters Per Second: " + Math.floor(700/time + .5);
 }
 
 function changeBBills(change) {
-	if (change>0 && bBillsMult == 2) 
+	if (change>0 && Player.bBillsMult == 2) 
 		change += change;
 	bBills += change;
 	document.getElementById("bBills").innerHTML = "<b>Banana Bills: </b> " + bBills;
@@ -136,10 +139,10 @@ function randomText() {
 }
 
 function genLetters() {
-	numLetters += letterRate;
-	letterSpeed += letterRate;
+	numLetters += Player.letterRate;
+	letterSpeed += Player.letterRate;
 
-	if (letterRate == 1) {
+	if (Player.letterRate == 1) {
 		var letter = alphabet[Math.floor(Math.random()*26)];
 
 		newLetter(letter);
@@ -147,7 +150,7 @@ function genLetters() {
 
 		return letter;
 	}
-	else if (letterRate == 2) {
+	else if (Player.letterRate == 2) {
 		var letters = alphaDouble[Math.floor(Math.random()*676)];
 
 		newLetter(letters.charAt(0));
@@ -344,7 +347,7 @@ function speedMultFunct() {
 }
 
 function giveMeMoney() {
-	changeBBills(1000);
+	changeBBills(10000);
 }
 
 function makeMonkeyKings() {
@@ -365,4 +368,29 @@ $.get( "ospd.txt", function( txt ) {
 	for ( var i = 0; i < dictArray.length; i++ ) {
 		dict[ dictArray[i] ] = true;
 	}
+	
+	//Once dictionary is loaded, start the game loop
+	calcTime();
+	driver();
 });
+
+//Save Game
+
+function SaveGame() {
+  window.localStorage.setItem("iMonkey-Player", JSON.stringify(Player)); //set localstorage for player info
+  console.log("Game Saved");
+}
+
+function LoadGame() {
+  $.extend(true, Player, JSON.parse(window.localStorage.getItem("iMonkey-Player"))); //load player
+  console.log("Game Loaded");
+}
+
+function ResetGame() {
+  window.localStorage.removeItem("iMonkey-Player"); //delete
+  console.log("Game Reset");
+  window.location.reload(); //refresh page to restart
+}
+
+LoadGame();
+
