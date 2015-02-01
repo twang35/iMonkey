@@ -38,8 +38,10 @@ var Player = {
 setTimeout('document.getElementById("firstLoad").innerHTML = \'<h3 style="margin-top: 0px;">Load A Text<h3>\'', 1000);
 
 function driver() {
-	randomText();
-	setTimeout("driver()", time);
+	if (isFinite(time)) {
+		randomText();
+		setTimeout("driver()", time);
+	}
 }
 
 // Buy Things
