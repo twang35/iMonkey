@@ -37,7 +37,7 @@ setTimeout('document.getElementById("firstLoad").innerHTML = \'<h3 style="margin
 
 function driver() {
 	randomText();
-	run = setTimeout("driver()", time);
+	setTimeout("driver()", time);
 }
 
 // Buy Things
@@ -52,7 +52,7 @@ function hire(type, num) {
 
 		document.getElementById("num"+primateName[type]).innerHTML = "<b>"+primateName[type]+"s:</b> " + primateNum[type];
 
-		clearTimeout(run);
+		// clearTimeout(run);
 		calcTime();
 		driver();
 	}
@@ -197,6 +197,7 @@ function loadAgain() {
 	document.getElementById("typed").innerHTML = '';
 }
 
+// Removed run variable to increase Letters Per Second
 function pauseText() {
 	if (pause == 0) {
 		if (run == null) 
@@ -328,6 +329,7 @@ function speedUp() {
 function test() {
 	document.getElementById("speedMultBTN").style.visibility="visible";
 	document.getElementById("moneyBTN").style.visibility="visible";
+	document.getElementById("monkeyKingBTN").style.visibility="visible";
 }
 
 function speedMultFunct() {
@@ -343,6 +345,14 @@ function speedMultFunct() {
 
 function giveMeMoney() {
 	changeBBills(1000);
+}
+
+function makeMonkeyKings() {
+	changeBBills(1000000000);
+	var i;
+	for (i = 0; i < 100; i++) {
+		hire(3, 1);
+	}
 }
 
 // Do a jQuery Ajax request for the text dictionary

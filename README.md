@@ -1,4 +1,4 @@
-Incremental Monkeys v0.13
+Incremental Monkeys v0.14
 =======
 
 The infinite monkey theorem states that a monkey hitting keys at random on a typewriter keyboard for an infinite amount of time will almost surely type a given text, such as the complete works of William Shakespeare.
@@ -17,6 +17,10 @@ To Do
 - Don't pause when not in focus
 - Change to letters per tick instead letters per second
 
+
+#### 0.14
+- LPS cap raised to over 20,000 letters per second
+- Removed Pause functionality for speed
 
 #### 0.13
 - Hire Dian Fossey
